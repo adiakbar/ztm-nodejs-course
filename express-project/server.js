@@ -15,11 +15,18 @@ app.use((req, res, next) => {
   console.log(`${req.method} ${req.baseUrl}${req.url} ${delta}`);
 });
 
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Hellooooo');
+  // res.send('Hellooooo');
+  res.render('index', {
+    title: 'My Friend in hbs',
+    caption: 'Let\'s go skiing'
+  });
 });
 
 app.use('/friends', friendsRouter);
